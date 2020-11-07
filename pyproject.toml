@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "discord-bot"
+version = "0.1.0"
+description = "A Discord bot for the egee.io Discord server"
+authors = ["egee-irl <brian@egee.io>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"discord.py" = "^1.5.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
