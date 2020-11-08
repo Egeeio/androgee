@@ -1,5 +1,5 @@
 import os
-import discord
+import discord  # this will be used later on
 from discord.ext import commands
 
 client = commands.Bot("$")
