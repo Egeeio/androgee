@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "discord-bot"
+name = "androgee"
 version = "0.1.0"
 description = "A Discord bot for the egee.io Discord server"
 authors = ["egee-irl <brian@egee.io>"]
@@ -8,6 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 "discord.py" = "^1.5.1"
+requests = "^2.25.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"
@@ -15,3 +16,6 @@ flake8 = "^3.8.4"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "androgee.androgee:start"
