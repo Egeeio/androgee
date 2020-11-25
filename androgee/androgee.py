@@ -6,23 +6,26 @@ from discord.ext import commands
 
 
 logging.basicConfig(level=logging.WARNING)
-bot = commands.Bot(command_prefix=os.environ['DISCORD_PREFIX'])
+bot = commands.Bot(command_prefix=os.environ["DISCORD_PREFIX"])
+
 
 @bot.event
 async def on_ready():
-    print('We is logged in as {0.user}'.format(bot))
+    print("We is logged in as {0.user}".format(bot))
 
 
 @bot.command(name="spray")
-async def spray(ctx):
+async def spray(ctx, member: discord.Member):
     image = get_image(ctx)
-    await ctx.send(file=image)
+    message = f"{member.mention} was sprayed by {ctx.message.author.mention}"
+    await ctx.send(message, file=image)
 
 
 @bot.command(name="bonk")
-async def spray(ctx):
+async def spray(ctx, member: discord.Member):
     image = get_image(ctx)
-    await ctx.send(file=image)
+    message = f"{member.mention} was bonked by {ctx.message.author.mention}"
+    await ctx.send(message, file=image)
 
 
 def get_image(ctx):
@@ -34,5 +37,6 @@ def get_image(ctx):
     img = discord.File(random.choice(images))
     return img
 
+
 def start():
-    bot.run(os.environ['DISCORD_TOKEN'])
+    bot.run(os.environ["DISCORD_TOKEN"])
