@@ -15,17 +15,23 @@ async def on_ready():
 
 
 @bot.command(name="spray")
-async def spray(ctx, member: discord.Member):
+async def spray(ctx, member: discord.Member = None):
     image = get_image(ctx)
-    message = f"{member.mention} was sprayed by {ctx.message.author.mention}"
-    await ctx.send(message, file=image)
+    if member == None:
+        await ctx.send(file=image)
+    else:
+        message = f"{member.mention} was sprayed by {ctx.message.author.mention}"
+        await ctx.send(message, file=image)
 
 
 @bot.command(name="bonk")
-async def spray(ctx, member: discord.Member):
+async def spray(ctx, member: discord.Member = None):
     image = get_image(ctx)
-    message = f"{member.mention} was bonked by {ctx.message.author.mention}"
-    await ctx.send(message, file=image)
+    if member == None:
+        await ctx.send(file=image)
+    else:
+        message = f"{member.mention} was bonked by {ctx.message.author.mention}"
+        await ctx.send(message, file=image)
 
 
 def get_image(ctx):
@@ -34,7 +40,8 @@ def get_image(ctx):
     for root, dirs, files in files:
         for name in files:
             images.append(f"{root}/{name}")
-    img = discord.File(random.choice(images))
+    loc = random.randint(0, len(images) - 1)
+    img = discord.File(images[loc])
     return img
 
 
