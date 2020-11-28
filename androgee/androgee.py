@@ -34,6 +34,41 @@ async def spray(ctx, member: discord.Member = None):
         await ctx.send(message, file=image)
 
 
+@bot.command(name="kick")
+async def kick(ctx, member: discord.Member, *, reason=None):
+    if "role_id" in [y.id for y in ctx.author.roles]:
+        await member.kick(reason=reason)
+    else:
+        await ctx.send("you are not a moderator")
+
+
+@bot.command(name="ban")
+async def ban(ctx, member: discord.Member, *, reason=None):
+    if "role_id" in [y.id for y in ctx.author.roles]:
+        await member.ban(reason=reason)
+    else:
+        await ctx.send("you are not a moderator")
+
+
+@bot.command(name="unban")
+async def unban(ctx, *, member):
+    if "role_id" in [y.id for y in ctx.author.roles]:
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split("#")
+        for ban_entery in banned_users:
+            user = ban_entery.user
+            if (user.name, user.discriminator) == (member_name, member_discriminator):
+                await ctx.guild.unbans(user)
+                await ctx.send(f"unbanned {user.name}#{user.discriminator}")
+    else:
+        await ctx.send("you are not a moderator")
+
+
+@bot.command(name="purge")
+async def purge():
+    pass
+
+
 def get_image(ctx):
     images = []
     files = os.walk(f"{os.path.dirname(__file__)}/media/{ctx.command}")
