@@ -6,6 +6,7 @@ from discord.ext import commands
 
 
 logging.basicConfig(level=logging.WARNING)
+mod_role_id = os.environ["mod_role_id"]
 bot = commands.Bot(command_prefix=os.environ["DISCORD_PREFIX"])
 
 
@@ -36,7 +37,7 @@ async def spray(ctx, member: discord.Member = None):
 
 @bot.command(name="kick")
 async def kick(ctx, member: discord.Member, *, reason=None):
-    if "role_id" in [y.id for y in ctx.author.roles]:
+    if mod_role_id in [y.id for y in ctx.author.roles]:
         await member.kick(reason=reason)
     else:
         await ctx.send("you are not a moderator")
@@ -44,7 +45,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
 @bot.command(name="ban")
 async def ban(ctx, member: discord.Member, *, reason=None):
-    if "role_id" in [y.id for y in ctx.author.roles]:
+    if mod_role_id in [y.id for y in ctx.author.roles]:
         await member.ban(reason=reason)
     else:
         await ctx.send("you are not a moderator")
@@ -52,7 +53,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 @bot.command(name="unban")
 async def unban(ctx, *, member):
-    if "role_id" in [y.id for y in ctx.author.roles]:
+    if mod_role_id in [y.id for y in ctx.author.roles]:
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split("#")
         for ban_entery in banned_users:
@@ -64,9 +65,11 @@ async def unban(ctx, *, member):
         await ctx.send("you are not a moderator")
 
 
-@bot.command(name="purge")
-async def purge():
-    pass
+@bot.command(name="purge", alias="clear")
+async def purge(ctx, ammount=5):
+    ammount = ammount + 1
+    if mod_role_id in [y.id for y in ctx.author.roles]:
+        await ctx.channel.purge(limit=ammount)
 
 
 def get_image(ctx):
