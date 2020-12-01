@@ -1,7 +1,0 @@
-- id: "black-hook"
-  name: "black format"
-  entry: run-black-hook.sh
-  types: [text]
-  exclude: ".yaml$|.yml$"
-  language: "script"
-  description: "This is a hook to run black on all python file"

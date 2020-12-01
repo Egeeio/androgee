@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+black_list.txt
 #Nosusypocalipse 
 .vscode 
 # Distribution / packaging
