@@ -67,7 +67,7 @@ async def role(ctx, command, *, role=None):
                 await ctx.send("only a admin can assign this role")
             else:
                 role_to_give = get(ctx.guild.roles, name=role)
-                await ctx.author.add_roles(ctx.author, role_to_give)
+                await ctx.author.add_roles(role_to_give)
 
 
 def get_image(ctx):
