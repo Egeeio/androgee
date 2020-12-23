@@ -49,10 +49,14 @@ async def spray(ctx, member: discord.Member = None):
             message = f"{member.mention} was bonked by {ctx.message.author.mention}"
             await ctx.send(message, file=image)
 
+
 @bot.command(name="source")
 async def source(ctx):
-    message = f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgees"
+    message = (
+        f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgees"
+    )
     await ctx.send(message)
+
 
 def get_image(ctx):
     images = []
