@@ -1,3 +1,0 @@
-@everyone
-kurva
-rust-bot

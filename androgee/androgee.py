@@ -1,17 +1,19 @@
 import os
 import random
 import logging
+import asyncio
 import discord
 from discord.ext import commands
 
 
 logging.basicConfig(level=logging.WARNING)
 bot = commands.Bot(command_prefix=os.environ["DISCORD_PREFIX"])
+mod_role_id = os.environ["mod_role_id"]
 
 
 @bot.event
 async def on_ready():
-    print("We is logged in as {0.user}".format(bot))
+    print(f"We is logged in as {bot.user}")
 
 
 @bot.command(name="spray")
@@ -20,8 +22,15 @@ async def spray(ctx, member: discord.Member = None):
     if member == None:
         await ctx.send(file=image)
     else:
-        message = f"{member.mention} was sprayed by {ctx.message.author.mention}"
-        await ctx.send(message, file=image)
+        if mod_role_id in [y.id for y in ctx.author.roles]:
+            await member.edit(mute=True)
+            message = f"{member.mention} was sprayed by {ctx.message.author.mention}"
+            await ctx.send(message, file=image)
+            await asyncio.sleep(10)
+            await member.edit(mute=False)
+        else:
+            message = f"{member.mention} was sprayed by {ctx.message.author.mention}"
+            await ctx.send(message, file=image)
 
 
 @bot.command(name="bonk")
@@ -30,8 +39,15 @@ async def spray(ctx, member: discord.Member = None):
     if member == None:
         await ctx.send(file=image)
     else:
-        message = f"{member.mention} was bonked by {ctx.message.author.mention}"
-        await ctx.send(message, file=image)
+        if mod_role_id in [y.id for y in ctx.author.roles]:
+            await member.edit(mute=True)
+            message = f"{member.mention} was bonked by {ctx.message.author.mention}"
+            await ctx.send(message, file=image)
+            await asyncio.sleep(10)
+            await member.edit(mute=False)
+        else:
+            message = f"{member.mention} was bonked by {ctx.message.author.mention}"
+            await ctx.send(message, file=image)
 
 
 def get_image(ctx):
