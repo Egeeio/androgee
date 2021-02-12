@@ -7,4 +7,4 @@ To run:
 * do `poetry install`
 * and then `poetry run start`
 
-![Androgee!!](Androgee_-_Reference_Sheet.png)
+![Androgee!!](.github/Androgee_-_Reference_Sheet.jpg)
