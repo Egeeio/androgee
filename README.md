@@ -6,3 +6,5 @@ To run:
 * set the environment variables `DISCORD_PREFIX` & `DISCORD_TOKEN`
 * do `poetry install`
 * and then `poetry run start`
+
+![Androgee!!](.github/Androgee_-_Reference_Sheet.jpg)
