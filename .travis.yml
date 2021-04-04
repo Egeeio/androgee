@@ -13,7 +13,7 @@ script:
 
 after_success:
   - docker build -t egeeio/androgee .
-  - docker login -u $username -p $pass
+  - echo "$pass" | docker login -u "$username" --password-stdin
 
 deploy:
   provider: script
