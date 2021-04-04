@@ -4,7 +4,9 @@ import random
 import logging
 import discord
 from discord.ext import commands
-from pathlib import Path # This makes working with files and searching through them a piece of cake
+from pathlib import (
+    Path,
+)  # This makes working with files and searching through them a piece of cake
 
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
@@ -14,12 +16,15 @@ try:
     COMMAND_PREFIX = os.environ["DISCORD_PREFIX"]
     BOT_TOKEN = os.environ["DISCORD_TOKEN"]
 except KeyError as e:
-    print(f'The {e} environment variable is missing! Androgee cannot run!')
+    print(f"The {e} environment variable is missing! Androgee cannot run!")
     sys.exit(1)
 
 logging.basicConfig(level=logging.WARNING)
 bot = commands.Bot(command_prefix=COMMAND_PREFIX)
-media_folder=Path(__file__, '../media').resolve() # Root of the media folder from file.
+media_folder = Path(
+    __file__, "../media"
+).resolve()  # Root of the media folder from file.
+
 
 @bot.event
 async def on_ready():
@@ -76,8 +81,8 @@ async def source(ctx):
 
 # Super quick and easy random selection. Partial credit goes to citrusMarmelade.
 def get_image(ctx):
-    images = list(media_folder.glob(f'{ctx.command}/*'))
-    return discord.File(random.choice(images)) 
+    images = list(media_folder.glob(f"{ctx.command}/*"))
+    return discord.File(random.choice(images))
 
 
 def start():
