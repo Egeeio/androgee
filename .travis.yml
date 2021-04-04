@@ -6,4 +6,4 @@ install:
 - poetry install
 script:
 # - poetry run black androgee/* --check
-- poetry run flake8
+# - poetry run flake8
