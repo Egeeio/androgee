@@ -14,9 +14,10 @@ script:
 after_success:
   - docker build -t egeeio/androgee .
   - echo "$pass" | docker login --username "$login" --password-stdin
+  - docker push egeeio/androgee:latest
 
-deploy:
-  provider: script
-  script: docker push egeeio/androgee
-  on:
-    branch: main
+# deploy:
+#   provider: script
+#   script: docker push egeeio/androgee:latest
+#   on:
+#     branch: main
