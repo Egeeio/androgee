@@ -1,4 +1,5 @@
 # androgee
+[![Build Status](https://travis-ci.com/Egeeio/androgee.svg?branch=main)](https://travis-ci.com/Egeeio/androgee)
 
 Requirements & venv are handled by Poetry - https://python-poetry.org/docs & https://python-poetry.org/docs/basic-usage
 
