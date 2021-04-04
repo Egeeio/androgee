@@ -36,7 +36,7 @@ async def on_ready():
 async def spray(ctx, member: discord.Member = None):
     try:
         image = get_image(ctx)
-        if member == None:
+        if member is None:
             await ctx.send(file=image)
         else:
             ctx.send(f"!tempmute {member.mention} 300 being too rowdy")
@@ -44,7 +44,7 @@ async def spray(ctx, member: discord.Member = None):
             await ctx.send(message, file=image)
     except commands.MissingRole:
         image = get_image(ctx)
-        if member == None:
+        if member is None:
             await ctx.send(file=image)
         else:
             message = f"{member.mention} was sprirzered by {ctx.message.author.mention}"
@@ -53,10 +53,10 @@ async def spray(ctx, member: discord.Member = None):
 
 @bot.command(name="bonk")
 @commands.has_any_role(mod_role_name, mod_role_id)
-async def spray(ctx, member: discord.Member = None):
+async def bonk(ctx, member: discord.Member = None):
     try:
         image = get_image(ctx)
-        if member == None:
+        if member is None:
             await ctx.send(file=image)
         else:
             ctx.send(f"!tempmute {member.mention} 300 being too rowdy")
@@ -64,7 +64,7 @@ async def spray(ctx, member: discord.Member = None):
             await ctx.send(message, file=image)
     except commands.MissingRole:
         image = get_image(ctx)
-        if member == None:
+        if member is None:
             await ctx.send(file=image)
         else:
             message = f"{member.mention} was bonked by {ctx.message.author.mention}"
@@ -79,7 +79,7 @@ async def source(ctx):
     await ctx.send(message)
 
 
-# Super quick and easy random selection. Partial credit goes to citrusMarmelade.
+# Super quick and easy random selection, partial credit to citrusMarmelade
 def get_image(ctx):
     images = list(media_folder.glob(f"{ctx.command}/*"))
     return discord.File(random.choice(images))
