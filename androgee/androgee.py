@@ -10,6 +10,9 @@ from pathlib import (
 
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
+if os.path.exists(".env"):
+    from dotenv import load_dotenv
+    load_dotenv()
 try:
     mod_role_id = os.environ["mod_role_id"]
     mod_role_name = os.environ["mod_role_name"]
@@ -78,6 +81,22 @@ async def source(ctx):
     )
     await ctx.send(message)
 
+@bot.event
+async def on_message(ctx):
+    check = await last_message(ctx,ctx.content)
+    if check:
+        await ctx.channel.send(f"<@!{mod_role_id}> spamer")
+        await ctx.author.kick()
+
+async def last_message(ctx,og_meesage):
+    messages = await ctx.channel.history(limit=10).flatten()
+    count=1
+    for message in messages:
+        if message.content == og_meesage:
+            count+=1
+    if count > 5:
+        return True
+    return False
 
 # Super quick and easy random selection, partial credit to citrusMarmelade
 def get_image(ctx):
