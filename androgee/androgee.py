@@ -28,6 +28,7 @@ media_folder = Path(
     __file__, "../media"
 ).resolve()  # Root of the media folder from file.
 
+
 # Super quick and easy random selection, partial credit to citrusMarmelade
 def get_image(ctx):
     images = list(media_folder.glob(f"{ctx.command}/*"))
@@ -44,24 +45,19 @@ class Androgee(commands.Cog):
 
     @commands.command(name="spray", aliases=["spritzered"])
     async def spray(self, ctx, member: discord.Member = None):
-        if mod_role_id in [y.id for y in ctx.author.roles] and member != None:
+        if mod_role_id in [y.id for y in ctx.author.roles] and member is not None:
             await member.send("Hey just a heads up you where to rowdy, tone it down")
             await ctx.channel.clear(10)
         image = get_image(ctx)
         if member is None:
             await ctx.send(file=image)
         else:
-            try:
-                message = (
-                    f"{member.mention} was sprirzered by {ctx.message.author.mention}"
-                )
-                await ctx.send(message, file=image)
-            except:
-                await ctx.send(file=image)
+            message = f"{member.mention} was sprirzered by {ctx.message.author.mention}"
+            await ctx.send(message, file=image)
 
     @commands.command(name="bonk")
     async def bonk(self, ctx, member: discord.Member = None):
-        if mod_role_id in [y.id for y in ctx.author.roles] and member != None:
+        if mod_role_id in [y.id for y in ctx.author.roles] and member is not None:
             await member.send("Hey just a heads up you where to rowdy, tone it down")
             await ctx.channel.purge(10)
         image = get_image(ctx)
