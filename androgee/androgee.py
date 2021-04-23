@@ -9,7 +9,7 @@ from pathlib import (
     Path,
 )
 
-with open("badwords.json", "r") as f:
+with open("configs/badwords.json", "r") as f:
     global swear_list
     swear_list = json.loads(f.read())["banned"]
 
@@ -86,7 +86,7 @@ class Androgee(commands.Cog):
     @commands.command(name="reload")
     @commands.has_any_role(mod_role_name, mod_role_id)
     async def reload(self, ctx):
-        with open("badwords.json", "r") as f:
+        with open("configs/badwords.json", "r") as f:
             global swear_list
             swear_list = json.loads(f.read())["banned"]
         ctx.send("updated the banned word list")
