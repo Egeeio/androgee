@@ -2,11 +2,16 @@ import os
 import sys
 import random
 import logging
+import json
 import discord
 from discord.ext import commands
 from pathlib import (
     Path,
 )
+
+with open("badwords.json", "r") as f:
+    global swear_list
+    swear_list = json.loads(f.read())["banned"]
 
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
@@ -33,6 +38,12 @@ media_folder = Path(
 def get_image(ctx):
     images = list(media_folder.glob(f"{ctx.command}/*"))
     return discord.File(random.choice(images))
+
+
+def isbad(word) -> bool:
+    if word in swear_list:
+        return True
+    return False
 
 
 class Androgee(commands.Cog):
@@ -79,6 +90,16 @@ class Androgee(commands.Cog):
             await ctx.channel.send(f"<@!{mod_role_id}> spamer")
             await ctx.author.send(
                 "admins have been alerted to your shenanigans. You should probably stop unless getting banned is your game plan"
+            )
+        badwords = False
+        for word in ctx.content.split(" "):
+            check = isbad(word)
+            if check:
+                badwords = True
+        if badwords:
+            await ctx.delete()
+            await ctx.author.send(
+                "please stop using slurs, we don't tolarate them in any manner"
             )
 
     async def last_message(self, ctx, og_meesage):
