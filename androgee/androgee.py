@@ -89,7 +89,7 @@ class Androgee(commands.Cog):
         with open("configs/badwords.json", "r") as f:
             global swear_list
             swear_list = json.loads(f.read())["banned"]
-        ctx.send("updated the banned word list")
+        await ctx.send("updated the banned word list")
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
