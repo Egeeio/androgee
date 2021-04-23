@@ -86,7 +86,7 @@ async def on_message(ctx):
     check = await last_message(ctx,ctx.content)
     if check:
         await ctx.channel.send(f"<@!{mod_role_id}> spamer")
-        await ctx.author.kick()
+        await ctx.author.send("admins have been alerted to your shenanigans. You should probably stop unless getting banned is your game plan")
 
 async def last_message(ctx,og_meesage):
     messages = await ctx.channel.history(limit=10).flatten()
