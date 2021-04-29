@@ -101,7 +101,7 @@ class Androgee(commands.Cog):
             )
         badwords = False
         for word in ctx.content.split(" "):
-            check = isbad(word)
+            check = isbad(word.replace("~","").replace("`",""))
             if check:
                 badwords = True
         if badwords:
