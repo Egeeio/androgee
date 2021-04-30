@@ -11,13 +11,12 @@ from pathlib import (
 
 with open("configs/badwords.json", "r") as f:
     global swear_list
-    swear_list = (
-        requests.get(
-            "https://raw.githubusercontent.com/dariusk/wordfilter/master/lib/badwords.json"
-        )
-        .json()
-    )
-    swear_list.append("trap") # the word trap was requested by someone on the server maybe we should have a seprate git repo for the wordlist?
+    swear_list = requests.get(
+        "https://raw.githubusercontent.com/dariusk/wordfilter/master/lib/badwords.json"
+    ).json()
+    swear_list.append(
+        "trap"
+    )  # the word trap was requested by someone on the server maybe we should have a seprate git repo for the wordlist?
 
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
@@ -46,7 +45,7 @@ def get_image(ctx):
     return discord.File(random.choice(images))
 
 
-def isbad(word:str) -> bool:
+def isbad(word: str) -> bool:
     if word.lower() in swear_list:
         return True
     return False
