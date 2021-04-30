@@ -2,7 +2,7 @@ import os
 import sys
 import random
 import logging
-import json
+import requests
 import discord
 from discord.ext import commands
 from pathlib import (
@@ -11,7 +11,13 @@ from pathlib import (
 
 with open("configs/badwords.json", "r") as f:
     global swear_list
-    swear_list = json.loads(f.read())["banned"]
+    swear_list = (
+        requests.get(
+            "https://raw.githubusercontent.com/dariusk/wordfilter/master/lib/badwords.json"
+        )
+        .json()
+    )
+    swear_list.append("trap") # the word trap was requested by someone on the server maybe we should have a seprate git repo for the wordlist?
 
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
@@ -40,8 +46,8 @@ def get_image(ctx):
     return discord.File(random.choice(images))
 
 
-def isbad(word) -> bool:
-    if word in swear_list:
+def isbad(word:str) -> bool:
+    if word.lower() in swear_list:
         return True
     return False
 
@@ -83,14 +89,6 @@ class Androgee(commands.Cog):
             message = f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgee"
             await ctx.send(message)
 
-    @commands.command(name="reload")
-    @commands.has_any_role(mod_role_name, mod_role_id)
-    async def reload(self, ctx):
-        with open("configs/badwords.json", "r") as f:
-            global swear_list
-            swear_list = json.loads(f.read())["banned"]
-        await ctx.send("updated the banned word list")
-
     @commands.Cog.listener()
     async def on_message(self, ctx):
         check = await self.last_message(ctx, ctx.content)
@@ -114,7 +112,9 @@ class Androgee(commands.Cog):
         messages = await ctx.channel.history(limit=10).flatten()
         count = 1
         for message in messages:
-            if message.content == og_meesage:
+            if message.author.bot:
+                return False
+            elif message.content == og_meesage:
                 count += 1
         if count > 5:
             return True
