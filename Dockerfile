@@ -1,7 +1,5 @@
 FROM python:3.9-buster
 RUN mkdir /app
-# mount /app/configs and place badwords.json in the folder you have badwords.json in
-COPY configs /app/configs/  
 COPY androgee /app/androgee
 COPY poetry.lock /app
 COPY pyproject.toml /app
