@@ -33,6 +33,7 @@ exclude = '''
   | buck-out
   | build
   | dist
+  | .env
 )/
 '''
 
