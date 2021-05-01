@@ -21,3 +21,19 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "androgee.androgee:start"
+[tool.black]
+include = 'androgee/*.py'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.github
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+
