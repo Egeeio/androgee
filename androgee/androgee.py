@@ -9,14 +9,13 @@ from pathlib import (
     Path,
 )
 
-with open("configs/badwords.json", "r") as f:
-    global swear_list
-    swear_list = requests.get(
-        "https://raw.githubusercontent.com/dariusk/wordfilter/master/lib/badwords.json"
-    ).json()
-    swear_list.append(
-        "trap"
-    )  # the word trap was requested by someone on the server maybe we should have a seprate git repo for the wordlist?
+global swear_list
+swear_list = requests.get(
+    "https://raw.githubusercontent.com/dariusk/wordfilter/master/lib/badwords.json"
+).json()
+swear_list.append(
+    "trap"
+)  # the word trap was requested by someone on the server maybe we should have a seprate git repo for the wordlist?
 
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
@@ -80,7 +79,7 @@ class Androgee(commands.Cog):
         if member is None:
             await ctx.send(file=image)
         else:
-            message = f"{member.mention} was bonked by {ctx.message.author.mention}"
+            message = f"{member.mention} was bonked by {ctx.author.mention}"
             await ctx.send(message, file=image)
 
         @commands.command(name="source")
@@ -92,27 +91,47 @@ class Androgee(commands.Cog):
     async def on_message(self, ctx):
         check = await self.last_message(ctx, ctx.content)
         if check:
-            await ctx.channel.send(f"<@!{mod_role_id}> spamer")
+            await ctx.channel.send(
+                f"<@&{mod_role_id}> Hey admins there is a person spamming messages, I'm locking the channel"
+            )
             await ctx.author.send(
                 "admins have been alerted to your shenanigans. You should probably stop unless getting banned is your game plan"
             )
+            overwrite = ctx.channel.overwrites_for(ctx.guild.default_role)
+            role = ctx.guild.get_role(mod_role_id)
+            overwrites_owner = ctx.channel.overwrites_for(role)
+            if overwrite.send_messages is False:
+                await ctx.send(
+                    f"🔒 Channel is already locked down. Use `{COMMAND_PREFIX}unlock` to unlock."
+                )
+            else:
+                overwrite.send_messages = False
+                overwrites_owner.send_messages = True
+                await ctx.channel.set_permissions(
+                    ctx.guild.default_role, overwrite=overwrite
+                )
+                await ctx.channel.set_permissions(
+                    ctx.guild.get_role(mod_role_id),
+                    overwrite=overwrites_owner,
+                )
         badwords = False
         for word in ctx.content.split(" "):
             check = isbad(word.replace("~", "").replace("`", ""))
             if check:
                 badwords = True
         if badwords:
-            await ctx.delete()
             await ctx.author.send(
-                "please stop using slurs, we don't tolarate them in any manner"
+                f"please stop using slurs, we don't tolarate them in any manner the following mess triggered this message:\n{ctx.content}"
             )
+
+            await ctx.delete()
 
     async def last_message(self, ctx, og_meesage):
         messages = await ctx.channel.history(limit=10).flatten()
         count = 1
         for message in messages:
             if message.author.bot:
-                return False
+                pass  # if the bot said it, it don't matter
             elif message.content == og_meesage:
                 count += 1
         if count > 5:
