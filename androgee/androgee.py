@@ -82,10 +82,24 @@ class Androgee(commands.Cog):
             message = f"{member.mention} was bonked by {ctx.author.mention}"
             await ctx.send(message, file=image)
 
-        @commands.command(name="source")
-        async def source(self, ctx):
-            message = f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgee"
-            await ctx.send(message)
+    @commands.command(name="source")
+    async def source(self, ctx):
+        message = (
+            f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgee"
+        )
+        await ctx.send(message)
+
+    @commands.command(name="unlock")
+    async def unlock(self, ctx):
+        overwrite = ctx.channel.overwrites_for(ctx.guild.default_role)
+        if overwrite.send_messages:
+            await ctx.send("this channel is already unlocked 🔓")
+        else:
+            overwrite.send_messages = True
+            await ctx.channel.set_permissions(
+                ctx.guild.default_role, overwrite=overwrite
+            )
+            await ctx.send("this channel is now unlocked 🔓")
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
@@ -98,22 +112,21 @@ class Androgee(commands.Cog):
                 "admins have been alerted to your shenanigans. You should probably stop unless getting banned is your game plan"
             )
             overwrite = ctx.channel.overwrites_for(ctx.guild.default_role)
-            role = ctx.guild.get_role(mod_role_id)
+            role = ctx.guild.get_role(int(mod_role_id))
+            print(role)
             overwrites_owner = ctx.channel.overwrites_for(role)
-            if overwrite.send_messages is False:
-                await ctx.send(
-                    f"🔒 Channel is already locked down. Use `{COMMAND_PREFIX}unlock` to unlock."
-                )
-            else:
-                overwrite.send_messages = False
-                overwrites_owner.send_messages = True
-                await ctx.channel.set_permissions(
-                    ctx.guild.default_role, overwrite=overwrite
-                )
-                await ctx.channel.set_permissions(
-                    ctx.guild.get_role(mod_role_id),
-                    overwrite=overwrites_owner,
-                )
+            await ctx.channel.send(
+                f"🔒 Channel is locked down. Use `{COMMAND_PREFIX}unlock` to unlock."
+            )
+            overwrite.send_messages = False
+            overwrites_owner.send_messages = True
+            await ctx.channel.set_permissions(
+                ctx.guild.default_role, overwrite=overwrite
+            )
+            await ctx.channel.set_permissions(
+                role,
+                overwrite=overwrites_owner,
+            )
         badwords = False
         for word in ctx.content.split(" "):
             check = isbad(word.replace("~", "").replace("`", ""))
