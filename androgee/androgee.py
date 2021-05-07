@@ -89,6 +89,7 @@ class Androgee(commands.Cog):
         )
         await ctx.send(message)
 
+    @commands.has_any_role(mod_role_name, int(mod_role_id))
     @commands.command(name="unlock")
     async def unlock(self, ctx):
         overwrite = ctx.channel.overwrites_for(ctx.guild.default_role)
