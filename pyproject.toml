@@ -12,7 +12,9 @@ requests = "^2.25.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"
-black = "^20.8b1"
+python-dotenv = "^0.17.0"
+black = "^21.4b2"
+pre-commit = "^2.12.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -20,3 +22,26 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "androgee.androgee:start"
+[tool.black]
+include =  '''
+/(
+    androgee
+)/
+'''
+
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.github
+  | _build
+  | buck-out
+  | build
+  | dist
+  | .env
+  | media
+)/
+'''
+
+

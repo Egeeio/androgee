@@ -8,7 +8,7 @@ To run:
     - `DISCORD_PREFIX`
     - `DISCORD_TOKEN`
     - `mod_role_id`
-    - `mod_role_id`
+    - `mod_role_name`
 * do `poetry install`
 * and then `poetry run start`
 
