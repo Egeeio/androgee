@@ -11,12 +11,8 @@ from pathlib import (
 
 global swear_list
 swear_list = requests.get(
-    "https://raw.githubusercontent.com/dariusk/wordfilter/master/lib/badwords.json"
+    "https://raw.githubusercontent.com/advaithm/badwords/master/badwords.json"
 ).json()
-swear_list.append(
-    "trap"
-)  # the word trap was requested by someone on the server maybe we should have a seprate git repo for the wordlist?
-
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
 if os.path.exists(".env"):
