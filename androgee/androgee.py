@@ -5,7 +5,7 @@ from discord.ext import commands
 from pathlib import (
     Path,
 )
-from androgee.cogs.spam_badwords import Androgee
+from androgee.cogs.spam_badwords import BadWords
 from androgee.init import COMMAND_PREFIX, BOT_TOKEN, MOD_ROLE_ID
 
 
@@ -57,5 +57,5 @@ async def source(self, ctx):
 
 
 def start():
-    bot.add_cog(Androgee(bot))
+    bot.add_cog(BadWords(bot))
     bot.run(BOT_TOKEN)

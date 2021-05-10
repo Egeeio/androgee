@@ -7,8 +7,8 @@ To run:
 * set the following environment variables:
     - `DISCORD_PREFIX`
     - `DISCORD_TOKEN`
-    - `mod_role_id`
-    - `mod_role_name`
+    - `MOD_ROLE_ID`
+    - `MOD_ROLE_NAME`
 * do `poetry install`
 * and then `poetry run start`
 

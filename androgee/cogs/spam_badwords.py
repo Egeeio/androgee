@@ -8,7 +8,7 @@ def isbad(word: str) -> bool:
     return False
 
 
-class Androgee(commands.Cog):
+class BadWords(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
