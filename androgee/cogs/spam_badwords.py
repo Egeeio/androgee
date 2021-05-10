@@ -55,17 +55,16 @@ class BadWords(commands.Cog):
                 role,
                 overwrite=overwrites_owner,
             )
-        badwords = False
-        for word in ctx.content.split(" "):
-            check = isbad(word.replace("~", "").replace("`", ""))
-            if check:
-                badwords = True
-        if badwords:
-            await ctx.author.send(
-                f"please stop using slurs, we don't tolarate them in any manner the following mess triggered this message:\n{ctx.content}"
-            )
-
-            await ctx.delete()
+        else:  # we don't need to run this if the spam check
+            for word in ctx.content.split(" "):
+                check = isbad(word.replace("~", "").replace("`", ""))
+                if check:
+                    # sometime this throws a 400 and says it can not dm the user. in testing  it does send a dm
+                    await ctx.author.send(
+                        f"please stop using slurs, we don't tolarate them in any manner the following message triggered this message:\n{ctx.content}"
+                    )
+                    await ctx.delete()
+                    break
 
     async def last_message(self, ctx, og_meesage):
         messages = await ctx.channel.history(limit=10).flatten()
