@@ -1,5 +1,5 @@
 from discord.ext import commands
-from androgee.init import mod_role_name, mod_role_id, swear_list, COMMAND_PREFIX
+from androgee.init import MOD_ROLE_ID, MOD_ROLE_NAME, swear_list, COMMAND_PREFIX
 
 
 def isbad(word: str) -> bool:
@@ -16,7 +16,7 @@ class Androgee(commands.Cog):
     async def on_ready(self):
         print(f"We is logged in as {self.bot.user}")
 
-    @commands.has_any_role(mod_role_name, int(mod_role_id))
+    @commands.has_any_role(MOD_ROLE_NAME, int(MOD_ROLE_ID))
     @commands.command(name="unlock")
     async def unlock(self, ctx):
         overwrite = ctx.channel.overwrites_for(ctx.guild.default_role)
@@ -34,13 +34,13 @@ class Androgee(commands.Cog):
         check = await self.last_message(ctx, ctx.content)
         if check:
             await ctx.channel.send(
-                f"<@&{mod_role_id}> Hey admins there is a person spamming messages, I'm locking the channel"
+                f"<@&{MOD_ROLE_ID}> Hey admins there is a person spamming messages, I'm locking the channel"
             )
             await ctx.author.send(
                 "admins have been alerted to your shenanigans. You should probably stop unless getting banned is your game plan"
             )
             overwrite = ctx.channel.overwrites_for(ctx.guild.default_role)
-            role = ctx.guild.get_role(int(mod_role_id))
+            role = ctx.guild.get_role(int(MOD_ROLE_ID))
             print(role)
             overwrites_owner = ctx.channel.overwrites_for(role)
             await ctx.channel.send(

@@ -6,7 +6,7 @@ from pathlib import (
     Path,
 )
 from androgee.cogs.spam_badwords import Androgee
-from androgee.init import COMMAND_PREFIX, BOT_TOKEN, mod_role_id
+from androgee.init import COMMAND_PREFIX, BOT_TOKEN, MOD_ROLE_ID
 
 
 logging.basicConfig(level=logging.WARNING)
@@ -24,7 +24,7 @@ def get_image(ctx):
 
 @bot.command(name="spray", aliases=["spritzered"])
 async def spray(self, ctx, member: discord.Member = None):
-    if mod_role_id in [y.id for y in ctx.author.roles] and member is not None:
+    if MOD_ROLE_ID in [y.id for y in ctx.author.roles] and member is not None:
         await member.send("Hey just a heads up you where to rowdy, tone it down")
         await ctx.channel.clear(10)
     image = get_image(ctx)
@@ -37,7 +37,7 @@ async def spray(self, ctx, member: discord.Member = None):
 
 @bot.command(name="bonk")
 async def bonk(self, ctx, member: discord.Member = None):
-    if mod_role_id in [y.id for y in ctx.author.roles] and member is not None:
+    if MOD_ROLE_ID in [y.id for y in ctx.author.roles] and member is not None:
         await member.send("Hey just a heads up you where to rowdy, tone it down")
         await ctx.channel.purge(10)
     image = get_image(ctx)

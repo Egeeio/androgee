@@ -13,8 +13,8 @@ if os.path.exists(".env"):
 
     load_dotenv()
 try:
-    mod_role_id = os.environ["mod_role_id"]
-    mod_role_name = os.environ["mod_role_name"]
+    MOD_ROLE_ID = os.environ["MOD_ROLE_ID"]
+    MOD_ROLE_NAME = os.environ["MOD_ROLE_NAME"]
     COMMAND_PREFIX = os.environ["DISCORD_PREFIX"]
     BOT_TOKEN = os.environ["DISCORD_TOKEN"]
 except KeyError as e:
