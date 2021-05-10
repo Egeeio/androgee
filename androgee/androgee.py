@@ -48,6 +48,14 @@ async def bonk(self, ctx, member: discord.Member = None):
         await ctx.send(message, file=image)
 
 
+@bot.command(name="source")
+async def source(self, ctx):
+    message = (
+        f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgee"
+    )
+    await ctx.send(message)
+
+
 def start():
     bot.add_cog(Androgee(bot))
     bot.run(BOT_TOKEN)

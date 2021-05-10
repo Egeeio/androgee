@@ -16,13 +16,6 @@ class Androgee(commands.Cog):
     async def on_ready(self):
         print(f"We is logged in as {self.bot.user}")
 
-    @commands.command(name="source")
-    async def source(self, ctx):
-        message = (
-            f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgee"
-        )
-        await ctx.send(message)
-
     @commands.has_any_role(mod_role_name, int(mod_role_id))
     @commands.command(name="unlock")
     async def unlock(self, ctx):
