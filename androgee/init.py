@@ -21,5 +21,4 @@ try:
     COMMAND_PREFIX = env["DISCORD_PREFIX"]
     BOT_TOKEN = env["DISCORD_TOKEN"]
 except KeyError as e:
-    print(f"The {e} environment variable is missing! Androgee cannot run!")
-    sys.exit(1)
+    sys.exit(f"The {e} environment variable is missing! Androgee cannot run!")
