@@ -13,10 +13,13 @@ if os.path.exists(".env"):
 
     load_dotenv()
 try:
-    MOD_ROLE_ID = os.environ["MOD_ROLE_ID"]
-    MOD_ROLE_NAME = os.environ["MOD_ROLE_NAME"]
-    COMMAND_PREFIX = os.environ["DISCORD_PREFIX"]
-    BOT_TOKEN = os.environ["DISCORD_TOKEN"]
+    env = (
+        os.environ
+    )  # calling this for each value recreates the dict which increases load time
+    MOD_ROLE_ID = env["MOD_ROLE_ID"]
+    MOD_ROLE_NAME = env["MOD_ROLE_NAME"]
+    COMMAND_PREFIX = env["DISCORD_PREFIX"]
+    BOT_TOKEN = env["DISCORD_TOKEN"]
 except KeyError as e:
     print(f"The {e} environment variable is missing! Androgee cannot run!")
     sys.exit(1)
