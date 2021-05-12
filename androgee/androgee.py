@@ -1,7 +1,7 @@
 import random
 import logging
 import discord
-from discord.ext import typed_commands as commands  # type:ignore
+from discord.ext import typed_commands as commands
 from pathlib import (
     Path,
 )

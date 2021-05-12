@@ -1,4 +1,4 @@
-from discord.ext import commands  # type: ignore
+from discord.ext import commands
 from androgee.init import MOD_ROLE_ID, MOD_ROLE_NAME, swear_list, COMMAND_PREFIX
 
 
