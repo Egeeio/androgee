@@ -8,3 +8,8 @@ repos:
   rev: 3.9.1
   hooks:
           - id: flake8
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'b84ce099a2fd3c5216b6ccf3fd176c3828b075fb'
+    hooks:
+    -   id: mypy
+        additional_dependencies: [discord.py-stubs==1.7.1]

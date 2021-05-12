@@ -1,7 +1,7 @@
 import random
 import logging
 import discord
-from discord.ext import commands
+from discord.ext import typed_commands as commands  # type: ignore
 from pathlib import (
     Path,
 )
@@ -59,3 +59,7 @@ async def source(self, ctx):
 def start():
     bot.add_cog(BadWords(bot))
     bot.run(BOT_TOKEN)
+
+
+if __name__ == "__main__":
+    start()

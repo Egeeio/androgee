@@ -15,6 +15,8 @@ flake8 = "^3.8.4"
 python-dotenv = "^0.17.0"
 black = "^21.4b2"
 pre-commit = "^2.12.1"
+mypy = "^0.812"
+"discord.py-stubs" = "^1.7.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
