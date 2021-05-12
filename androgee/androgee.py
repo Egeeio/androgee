@@ -23,7 +23,7 @@ def get_image(ctx):
 
 
 @bot.command(name="spray", aliases=["spritzered"])
-async def spray(self, ctx, member: discord.Member = None):
+async def spray(ctx, member: discord.Member = None):
     if MOD_ROLE_ID in [y.id for y in ctx.author.roles] and member is not None:
         await member.send("Hey just a heads up you where to rowdy, tone it down")
         await ctx.channel.clear(10)
@@ -36,7 +36,7 @@ async def spray(self, ctx, member: discord.Member = None):
 
 
 @bot.command(name="bonk")
-async def bonk(self, ctx, member: discord.Member = None):
+async def bonk(ctx, member: discord.Member = None):
     if MOD_ROLE_ID in [y.id for y in ctx.author.roles] and member is not None:
         await member.send("Hey just a heads up you where to rowdy, tone it down")
         await ctx.channel.purge(10)
@@ -49,7 +49,7 @@ async def bonk(self, ctx, member: discord.Member = None):
 
 
 @bot.command(name="source")
-async def source(self, ctx):
+async def source(ctx):
     message = (
         f"{ctx.author.mention} the source is at https://github.com/Egeeio/androgee"
     )
