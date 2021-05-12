@@ -1,7 +1,7 @@
 import random
 import logging
 import discord
-from discord.ext import typed_commands as commands  # type: ignore
+from discord.ext import typed_commands as commands  # type:ignore
 from pathlib import (
     Path,
 )
@@ -10,7 +10,7 @@ from androgee.init import COMMAND_PREFIX, BOT_TOKEN, MOD_ROLE_ID
 
 
 logging.basicConfig(level=logging.WARNING)
-bot = commands.Bot(command_prefix=COMMAND_PREFIX)
+bot: commands.Bot = commands.Bot(command_prefix=COMMAND_PREFIX)
 media_folder = Path(
     __file__, "../media"
 ).resolve()  # Root of the media folder from file.

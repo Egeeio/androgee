@@ -112,6 +112,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "discord-ext-typed-commands"
+version = "1.0.3"
+description = "Typed commands for discord.py"
+category = "main"
+optional = false
+python-versions = ">=3.6.1,<4.0.0"
+
+[package.dependencies]
+"discord.py" = ">=1.4.1,<2.0.0"
+
+[[package]]
 name = "discord.py"
 version = "1.7.2"
 description = "A Python wrapper for the Discord API"
@@ -398,7 +409,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "e365951fb5ac908a4e61bcc6fbf13ae0e5c95f32beb66046aa80abc612428802"
+content-hash = "2fd6f1519b5193e0333c72350955aa502460b8b7b00643688c6bb9e5a1e349ee"
 
 [metadata.files]
 aiohttp = [
@@ -475,6 +486,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+discord-ext-typed-commands = [
+    {file = "discord-ext-typed-commands-1.0.3.tar.gz", hash = "sha256:9bffb46dfc93b50356624bfe7756a4f0dad3a8933ffc160c9a44babaa7bc194d"},
+    {file = "discord_ext_typed_commands-1.0.3-py3-none-any.whl", hash = "sha256:8d19e01bef9b256df7506d735ca7a42e4ecb49f8a68fc4536d4221e1921d8c5c"},
 ]
 "discord.py" = [
     {file = "discord.py-1.7.2-py3-none-any.whl", hash = "sha256:f179db299c949a8cf0a12c1b1b94d0da9a18e088857154d93ae5ab1d807ec61d"},

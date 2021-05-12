@@ -7,8 +7,9 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-"discord.py" = "^1.5.1"
 requests = "^2.25.0"
+discord-ext-typed-commands = "^1.0.3"
+"discord.py" = "^1.7.2"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"

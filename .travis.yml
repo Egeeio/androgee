@@ -10,6 +10,7 @@ install:
 script:
   # - poetry run black androgee/* --check
   - poetry run flake8
+  - portry run mypy . --no-strict-optional --ignore-missing-imports
 
 after_success:
   - docker build -t egeeio/androgee .

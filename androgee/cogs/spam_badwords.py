@@ -1,4 +1,4 @@
-from discord.ext import typed_commands as commands  # type: ignore
+from discord.ext import commands  # type: ignore
 from androgee.init import MOD_ROLE_ID, MOD_ROLE_NAME, swear_list, COMMAND_PREFIX
 
 
@@ -57,10 +57,10 @@ class BadWords(commands.Cog):
             for word in ctx.content.split(" "):
                 if self.isbad(word.lower().replace("~", "").replace("`", "")):
                     # sometime this throws a 400 and says it can not dm the user. in testing  it does send a dm
+                    await ctx.delete()
                     await ctx.author.send(
                         f"please stop using slurs, we don't tolarate them in any manner the following message triggered this message:\n{ctx.content}"
                     )
-                    await ctx.delete()
                     break
 
     async def last_message(self, ctx, og_meesage) -> bool:

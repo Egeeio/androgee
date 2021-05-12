@@ -12,4 +12,5 @@ repos:
     rev: 'b84ce099a2fd3c5216b6ccf3fd176c3828b075fb'
     hooks:
     -   id: mypy
+        args: [--no-strict-optional, --ignore-missing-imports]
         additional_dependencies: [discord.py-stubs==1.7.1]
