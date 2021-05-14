@@ -65,12 +65,12 @@ class BadWords(commands.Cog):
 
     async def last_message(self, ctx, og_meesage) -> bool:
         messages = await ctx.channel.history(
-            limit=5
+            limit=3
         ).flatten()  # anything more then 5 increases wait time pretty heavily
         count = 1
         for message in messages:
-            if message.author.bot:
-                pass  # if the bot said it, it don't matter
+            if message.author.bot or MOD_ROLE_ID in [y.id for y in ctx.author.roles]:
+                pass  # if the bot or admins said it, it don't matter
             elif message.content == og_meesage:
                 count += 1
         if count > 5:

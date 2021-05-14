@@ -16,7 +16,7 @@ try:
     env = (
         os.environ
     )  # calling this for each value recreates the dict which increases load time
-    MOD_ROLE_ID = env["MOD_ROLE_ID"]
+    MOD_ROLE_ID = int(env["MOD_ROLE_ID"])
     MOD_ROLE_NAME = env["MOD_ROLE_NAME"]
     COMMAND_PREFIX = env["DISCORD_PREFIX"]
     BOT_TOKEN = env["DISCORD_TOKEN"]
