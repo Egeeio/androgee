@@ -26,7 +26,7 @@ def get_image(ctx):
 async def spray(ctx, member: discord.Member = None):
     if MOD_ROLE_ID in [y.id for y in ctx.author.roles] and member is not None:
         await member.send("Hey just a heads up you where to rowdy, tone it down")
-        await ctx.channel.clear(10)
+        await ctx.channel.purge(10)
     image = get_image(ctx)
     if member is None:
         await ctx.send(file=image)
