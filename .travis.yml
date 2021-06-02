@@ -8,7 +8,6 @@ before_install:
 install:
   - poetry install
 script:
-  # - poetry run black androgee/* --check
   - poetry run flake8
   - poetry run mypy . --no-strict-optional --ignore-missing-imports --namespace-packages
 
