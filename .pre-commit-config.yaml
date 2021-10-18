@@ -2,14 +2,14 @@ repos:
 - repo: https://github.com/psf/black
   rev: 21.6b0
   hooks:
-  - id: black
+  -   id: black
 - repo: https://gitlab.com/pycqa/flake8
   rev: 4.0.1
   hooks:
-  - id: flake8
-- repo: 
+    - id: flake8
+- repo: https://github.com/pre-commit/mirrors-mypy
   rev: '5cf22ccb774a8be8f47dfe4c1e8c4f177c608cbf'
   hooks:
-  - id: mypy
-    args: [--no-strict-optional, --ignore-missing-imports, --namespace-packages]
-    additional_dependencies: [discord.py-stubs==1.7.1, discord-ext-typed-commands==1.0.3]
+   - id: mypy
+     args: [--no-strict-optional, --ignore-missing-imports, --namespace-packages]
+     additional_dependencies: [discord.py-stubs==1.7.1, discord-ext-typed-commands==1.0.3]
