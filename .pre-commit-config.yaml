@@ -12,4 +12,4 @@ repos:
   hooks:
    - id: mypy
      args: [--no-strict-optional, --ignore-missing-imports, --namespace-packages]
-     additional_dependencies: [discord.py-stubs==1.7.1, discord-ext-typed-commands==1.0.3]
+     additional_dependencies: [discord.py-stubs==1.7.1, discord-ext-typed-commands==1.0.3, types-requests>=2.25.0]
