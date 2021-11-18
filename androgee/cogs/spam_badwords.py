@@ -1,9 +1,10 @@
+from typing import List
 from discord.ext import commands
 from androgee.init import MOD_ROLE_ID, MOD_ROLE_NAME, swear_list, COMMAND_PREFIX
 
 
-def isbad(word: str) -> bool:
-    if word in swear_list:
+def is_bad(text: List) -> bool:
+    if len(set(text).intersection(swear_list)) > 0:
         return True
     return False
 
@@ -54,14 +55,15 @@ class BadWords(commands.Cog):
                 overwrite=overwrites_owner,
             )
         else:  # we don't need to run this if the spam check
-            for word in ctx.content.split(" "):
-                if self.isbad(word.lower().replace("~", "").replace("`", "")):
-                    # sometime this throws a 400 and says it can not dm the user. in testing  it does send a dm
-                    await ctx.delete()
+            if is_bad(ctx.content.replace("~", "").replace("`", "").split(" ")):
+                # sometime this throws a 400 and says it can not dm the user. in testing  it does send a dm
+                await ctx.delete()
+                try:
                     await ctx.author.send(
                         f"please stop using slurs, we don't tolarate them in any manner the following message triggered this message:\n{ctx.content}"
                     )
-                    break
+                except Exception as e:
+                    print(f"failed to send message, got the following exception: {e}")
 
     async def last_message(self, ctx, og_meesage) -> bool:
         messages = await ctx.channel.history(
@@ -74,10 +76,5 @@ class BadWords(commands.Cog):
             elif message.content == og_meesage:
                 count += 1
         if count > 5:
-            return True
-        return False
-
-    def isbad(self, word: str) -> bool:
-        if word in swear_list:
             return True
         return False

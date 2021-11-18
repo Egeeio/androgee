@@ -1,11 +1,14 @@
 import requests
 import sys
 import os
+from typing import Set
 
 global swear_list
-swear_list = requests.get(
-    "https://raw.githubusercontent.com/advaithm/badwords/master/badwords.json"
-).json()
+swear_list: Set = set(
+    requests.get(
+        "https://raw.githubusercontent.com/advaithm/badwords/master/badwords.json"
+    ).json()
+)
 # I think it'd be better if we check if environment
 # variables are present before doing anything else.
 if os.path.exists(".env"):
