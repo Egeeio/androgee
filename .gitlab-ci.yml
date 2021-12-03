@@ -1,0 +1,6 @@
+image: docker:stable
+
+build-job:
+  stage: build
+  script:
+    - docker build -t egeeio/androgee .
