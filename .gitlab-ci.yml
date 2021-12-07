@@ -6,3 +6,5 @@ build-job:
     - 'cat .gitlab-ci.yml | grep image:.*qa_base: | grep -o v.* > /tmp/ver'
   script:
     - cat /tmp/ver
+  after_script:
+    - echo yeet > .gitlab-ci.yml
