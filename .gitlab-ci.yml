@@ -3,7 +3,7 @@ image: quay.io/podman/stable
 build-job:
   stage: build
   before_script:
-    - cat .gitlab-ci.yml | grep "image:.*qa_base:" | grep -o "v.*" > /tmp/ver
+    - grep 'image:.*qa_base:' .gitlab-ci.yml | grep -o 'v.*' > /tmp/ver
   script:
     - cat /tmp/ver
   after_script:
