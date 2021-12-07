@@ -1,10 +1,11 @@
 image: quay.io/podman/stable
 
+variables:
+  TEST: grep -o 'stable' .gitlab-ci.yml
+
 build-job:
   stage: build
-  before_script:
-    - grep 'image:.*qa_base:' .gitlab-ci.yml | grep -o 'v.*' > /tmp/ver
   script:
-    - cat /tmp/ver
+    - echo $TEST
   after_script:
     - echo yeet > .gitlab-ci.yml
