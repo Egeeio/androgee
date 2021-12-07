@@ -2,5 +2,7 @@ image: quay.io/podman/stable
 
 build-job:
   stage: build
+  before_script:
+    - 'cat .gitlab-ci.yml | grep image:.*qa_base: | grep -o v.* > /tmp/ver'
   script:
-    - podman build -t egeeio/androgee .
+    - cat /tmp/ver
