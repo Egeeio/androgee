@@ -1,6 +1,0 @@
-image: quay.io/podman/stable
-
-build-job:
-  stage: build
-  script:
-    - podman build -t egeeio/androgee .
